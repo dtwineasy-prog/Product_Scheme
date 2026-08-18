@@ -1,0 +1,900 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup – Card Product Scheme</title>
+<style>
+  :root{
+    --brand:#A21CAF; --brand-soft:#FBEAFB; --brand-dark:#86158F;
+    --ink:#1f2330; --ink-2:#5b6070; --ink-3:#8b90a0;
+    --line:#e4e6ed; --line-2:#eef0f5; --bg:#f4f5f8;
+    --green:#0d8a5f; --green-bg:#e6f6ee;
+    --amber:#9a6700; --amber-bg:#fdf6e3;
+    --red:#c0392b; --red-bg:#fdecea;
+    --blue:#1f6fb2; --blue-bg:#eaf3fb;
+    --orig:#8a8f9e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:14px/1.5 "Segoe UI",Roboto,-apple-system,"Helvetica Neue",Arial,sans-serif}
+  button{font:inherit;cursor:pointer}
+  input,select,textarea{font:inherit;color:var(--ink)}
+
+  .mockbar{background:#242938;color:#dfe3ee;padding:8px 18px;display:flex;
+    gap:14px;align-items:center;flex-wrap:wrap;font-size:12.5px}
+  .mockbar b{color:#fff}.mockbar .sep{width:1px;height:18px;background:#404659}
+  .mockbar select{background:#333949;color:#fff;border:1px solid #4a5165;border-radius:5px;padding:4px 8px}
+  .mockbar .hint{color:#9aa1b5}
+
+  .appbar{background:#fff;border-bottom:1px solid var(--line);padding:10px 18px;
+    display:flex;align-items:center;gap:12px}
+  .grid9{display:grid;grid-template-columns:repeat(3,4px);gap:3px}
+  .grid9 i{width:4px;height:4px;background:#5b6070;border-radius:1px;display:block}
+  .logo{width:26px;height:26px;border-radius:6px;background:var(--brand);color:#fff;
+    display:grid;place-items:center;font-weight:700;font-size:14px}
+  .appbar h1{font-size:17px;margin:0;font-weight:600}
+  .appbar .right{margin-left:auto;display:flex;gap:14px;color:var(--ink-2)}
+
+  .topnav{background:#fff;border-bottom:1px solid var(--line);padding:0 12px;display:flex;gap:2px;overflow-x:auto}
+  .topnav button{background:none;border:0;padding:13px 18px;color:var(--ink-2);white-space:nowrap;border-radius:6px 6px 0 0}
+  .topnav button.on{background:var(--brand-soft);color:var(--brand);font-weight:600}
+  .topnav button.casetab{background:var(--brand-soft);color:var(--brand);font-weight:600;display:flex;align-items:center;gap:9px}
+  .topnav button.casetab i{font-style:normal;opacity:.6}
+
+  .page{padding:16px 18px 60px}
+  .card{background:#fff;border-radius:8px;padding:16px 18px;box-shadow:0 1px 2px rgba(20,25,45,.06)}
+  .page h2{font-size:21px;margin:0}
+
+  .tabs1{display:flex;gap:6px;margin:14px 0 0;border-bottom:1px solid var(--line);
+    background:#ececf1;border-radius:8px 8px 0 0;padding:6px 6px 0}
+  .tabs1 button{background:none;border:0;padding:10px 20px;color:var(--ink-2);border-radius:7px 7px 0 0}
+  .tabs1 button.on{background:#fff;color:var(--ink);font-weight:600}
+  .panel{background:#fff;border-radius:0 0 8px 8px;padding:14px 16px 18px;box-shadow:0 1px 2px rgba(20,25,45,.06)}
+
+  .tabs2{display:flex;gap:22px;border-bottom:1px solid var(--line-2);margin-bottom:14px}
+  .tabs2 button{background:none;border:0;padding:8px 2px 10px;color:var(--ink-2);border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tabs2 button.on{color:var(--brand);border-color:var(--brand);font-weight:600}
+  .tabs3{display:flex;gap:20px;border-bottom:1px solid var(--line-2);margin:6px 0 14px}
+  .tabs3 button{background:none;border:0;padding:7px 2px 9px;color:var(--ink-2);border-bottom:2px solid transparent;margin-bottom:-1px;font-size:13.5px}
+  .tabs3 button.on{color:var(--ink);border-color:var(--brand);font-weight:600}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px}
+  .filters{display:flex;gap:10px;flex-wrap:wrap;flex:1}
+  .filters input,.filters select{border:1px solid var(--line);border-radius:6px;padding:8px 11px;min-width:160px;background:#fcfcfd}
+  .actions{display:flex;gap:10px;margin-left:auto}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:8px 14px;color:var(--ink);font-weight:500}
+  .btn:hover{background:#f7f7fa}
+  .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+  .btn.primary:hover{background:var(--brand-dark)}
+  .btn.danger{border-color:#e7b7b2;color:var(--red);background:#fff}
+  .btn.danger:hover{background:var(--red-bg)}
+  .btn.sm{padding:4px 10px;font-size:12.5px;border-radius:5px}
+
+  .tablewrap{border:1px solid var(--line);border-radius:7px;overflow:auto;max-height:470px}
+  table{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px}
+  th{position:sticky;top:0;background:#fafafc;text-align:left;font-weight:600;color:var(--ink-2);
+    padding:11px 14px;border-bottom:1px solid var(--line);white-space:nowrap;z-index:2}
+  th .aa{color:var(--ink-3);font-size:11px;margin-right:6px;font-weight:400}
+  td{padding:11px 14px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+  tbody tr:hover td{background:#fcfaff}
+  tbody tr.clickable{cursor:pointer}
+  td.wrap{white-space:normal;min-width:220px}
+  .empty{padding:38px 16px;text-align:center;color:var(--ink-3);white-space:normal}
+  .count{color:var(--ink-3);font-size:12.5px;margin-top:10px}
+
+  .chip{display:inline-block;padding:3px 10px;border-radius:5px;font-size:12.5px;font-weight:500;white-space:nowrap}
+  .chip.green{background:var(--green-bg);color:var(--green)}
+  .chip.amber{background:var(--amber-bg);color:var(--amber)}
+  .chip.red{background:var(--red-bg);color:var(--red)}
+  .chip.blue{background:var(--blue-bg);color:var(--blue)}
+  .chip.grey{background:#f0f1f4;color:var(--ink-2)}
+  .avatar{width:20px;height:20px;border-radius:50%;background:#e9e2f5;color:var(--brand);
+    display:inline-grid;place-items:center;font-size:10.5px;font-weight:700;margin-right:7px;vertical-align:-4px}
+  .thumb{width:44px;height:70px;border-radius:5px;border:1px solid var(--line-2);object-fit:cover;display:block;background:#f4f4f7}
+  .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+
+  .detail{display:flex;flex-direction:column;gap:14px}
+  .block{background:#fff;border-radius:8px;padding:20px 24px;box-shadow:0 1px 2px rgba(20,25,45,.06)}
+  .dhead{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .dhead h2{font-size:21px;margin:0}
+  .back{border:1px solid var(--line);background:#fff;border-radius:6px;width:32px;height:32px;
+    display:grid;place-items:center;color:var(--ink-2);font-size:16px;line-height:1}
+  .block h3{font-size:17px;margin:0 0 20px}
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 28px}
+  .m .lbl{font-size:12.5px;color:var(--ink-3);margin-bottom:5px}
+  .m .val{font-size:14px;word-break:break-word}
+  .m .orig{font-size:12.5px;color:var(--orig);margin-top:4px}
+  .m .orig b{color:var(--orig);font-weight:600}
+  .m.changed .val{font-weight:600}
+  .m.span2{grid-column:span 2}.m.span4{grid-column:span 4}
+  .assets{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .asset .lbl{font-size:12.5px;color:var(--ink-3);margin-bottom:7px}
+  .asset img{max-width:100%;border:1px solid var(--line-2);border-radius:6px;display:block}
+  .asset .origwrap{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+  .decision{display:flex;gap:10px;justify-content:flex-end}
+
+  .backdrop{position:fixed;inset:0;background:rgba(28,20,40,.55);display:none;z-index:50;padding:24px 16px;overflow:auto}
+  .backdrop.on{display:block}
+  .modal{background:#fff;border-radius:9px;max-width:1120px;margin:0 auto;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+  .modal header{display:flex;align-items:center;padding:18px 24px;border-bottom:1px solid var(--line-2)}
+  .modal header h3{margin:0;font-size:18px}
+  .modal header .x{margin-left:auto;background:none;border:0;font-size:20px;color:var(--ink-3);line-height:1}
+  .modal .body{padding:6px 20px;max-height:72vh;overflow:auto;background:#f7f7fa}
+  .modal footer{display:flex;gap:10px;padding:16px 24px;border-top:1px solid var(--line-2)}
+  .modal footer .right{margin-left:auto;display:flex;gap:10px}
+
+  .group{background:#fff;border:1px solid var(--line);border-radius:8px;margin:16px 0}
+  .group > .gh{padding:14px 18px;border-bottom:1px solid var(--line-2);font-weight:600;font-size:15px}
+  .group > .gb{padding:18px}
+  .speclink{font-size:12.5px;color:var(--brand);margin-top:6px;font-weight:400;display:block}
+  .speclink span{color:var(--ink-3)}
+
+  .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 18px}
+  .f{display:flex;flex-direction:column;gap:5px}
+  .f.c2{grid-column:span 2}.f.c3{grid-column:span 3}
+  .f label{font-size:13px;color:var(--ink-2)}
+  .f label .req{color:#d33;margin-right:3px}
+  .f input,.f select,.f textarea{border:1px solid var(--line);border-radius:6px;padding:9px 11px;background:#fff;width:100%}
+  .f textarea{min-height:72px;resize:vertical}
+  .f input:disabled,.f select:disabled{background:#f4f4f7;color:var(--ink-2)}
+  .f input:focus,.f select:focus,.f textarea:focus{outline:2px solid #ecd4f2;border-color:var(--brand)}
+  .f .err{color:#c0392b;font-size:12px;display:none}
+  .f .err code{background:#fbe3e0;border-radius:3px;padding:0 4px;font-size:11px}
+  .f.bad input,.f.bad select,.f.bad textarea{border-color:#e0a49d;background:#fffafa}
+  .f.bad .err{display:block}
+  .help{font-size:12px;color:var(--ink-3)}
+  .help b{font-family:ui-monospace,monospace;font-weight:600;color:var(--ink-2)}
+
+  .drop{border:1px dashed #cfd3de;border-radius:8px;background:#fafafc;padding:22px 16px;text-align:center;color:var(--ink-2);cursor:pointer}
+  .drop:hover{border-color:var(--brand);background:#fdf7fe}
+  .drop .ic{font-size:22px;color:var(--ink-3)}
+  .drop .t{margin:6px 0 3px}
+  .drop .s{font-size:12px;color:var(--ink-3)}
+  .drop input{display:none}
+  .shot{position:relative;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .shot img{width:100%;display:block}
+  .shot .tools{position:absolute;inset:0;display:grid;place-items:center;gap:14px;grid-auto-flow:column;
+    background:rgba(0,0,0,.35);opacity:0;transition:.15s}
+  .shot:hover .tools{opacity:1}
+  .shot .tools button{background:none;border:0;color:#fff;font-size:16px}
+  .row2{display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+  .row3{display:grid;grid-template-columns:1fr 210px;gap:20px;align-items:start}
+  .phone{border:2px solid #1f2330;border-radius:10px;overflow:hidden;background:#fff}
+  .phone img{width:100%;display:block}
+  .phcap{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:6px}
+
+  .varlist{margin:10px 0 0;padding-left:20px;font-size:13px}
+  .varlist li{margin:3px 0;font-family:ui-monospace,monospace}
+  .exval{display:flex;gap:8px;align-items:center;background:#f4f4f7;border-radius:6px;padding:9px 11px;
+    font-family:ui-monospace,monospace;font-size:12.5px;word-break:break-all}
+  .exval button{border:0;background:none;color:var(--brand);font-size:15px}
+  .cardprev{border:1px solid var(--line);border-radius:8px;background:#fff;padding:10px;min-height:210px;
+    display:grid;place-items:center;color:var(--ink-3);font-size:12.5px;text-align:center}
+  .cardprev img{max-width:100%;display:block}
+
+  .note{border-radius:7px;padding:12px 14px;font-size:13px;margin:0 0 14px;line-height:1.55}
+  .note.warn{background:var(--amber-bg);border:1px solid #f0dfae;color:#7a5200}
+  .note.info{background:var(--blue-bg);border:1px solid #cfe2f2;color:#155080}
+  .note.stop{background:var(--red-bg);border:1px solid #f2c8c2;color:#8e2b20}
+  .note b{display:block;margin-bottom:4px}
+  .note code{background:rgba(0,0,0,.07);border-radius:3px;padding:0 5px;font-size:11.5px}
+
+  .toast{position:fixed;right:20px;bottom:20px;z-index:99;display:flex;flex-direction:column;gap:10px}
+  .toast div{background:#242938;color:#fff;padding:12px 16px;border-radius:7px;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);font-size:13.5px;max-width:430px;animation:pop .22s ease}
+  .toast div.ok{background:#12694c}.toast div.no{background:#8e2b20}
+  @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  @media (max-width:980px){
+    .fields,.meta{grid-template-columns:repeat(2,1fr)}
+    .f.c3{grid-column:span 2}.m.span4{grid-column:span 2}
+    .row2,.row3,.assets{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="mockbar">
+  <b>MOCKUP</b> <span class="hint">Card Product Scheme – theo SRS v1.0</span>
+  <span class="sep"></span>
+  <label>Đang đăng nhập:
+    <select id="roleSel">
+      <option value="Product Maker">Product Maker (Quản trị thẻ)</option>
+      <option value="Product Checker">Product Checker</option>
+      <option value="ITOPS Admin">ITOPS Admin</option>
+      <option value="Viewer">Viewer</option>
+    </select>
+  </label>
+  <span class="hint" id="roleHint"></span>
+  <span class="sep"></span>
+  <button class="btn sm" id="resetBtn">Đặt lại dữ liệu</button>
+</div>
+
+<div class="appbar">
+  <div class="grid9"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="logo">P</div><h1>Product Configuration</h1>
+  <div class="right"><span>🔔</span><span>👤</span></div>
+</div>
+
+<div class="topnav" id="topnav"></div>
+<div id="root"></div>
+<div class="backdrop" id="backdrop"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= danh mục ================= */
+const STD_VARS=[
+  ['customer_full_name','Text','Họ và tên khách hàng'],
+  ['customer_dob','Text','Ngày sinh'],
+  ['employee_id','Text','Mã nhân viên / mã sinh viên'],
+  ['job_title','Text','Chức danh'],
+  ['duration','Text','Khóa học / thời hạn'],
+  ['term','Text','Kỳ hạn'],
+  ['avatar_image','Image','Ảnh chân dung khách hàng']
+];
+const SAMPLE_VAL={customer_full_name:'Nguyễn Văn An',customer_dob:'11/08/2008',
+  employee_id:'NV-000123',job_title:'Chuyên viên cao cấp',duration:'2026-2030',term:'3 năm',avatar_image:'avatar'};
+const SPEC_LINK={url:'https://docs.google.com/document/d/quy-cach-anh-vikki',updated:'12/08/2026'};
+const TPL_GUIDE={url:'https://docs.google.com/document/d/huong-dan-template-card-face'};
+const CAN_MAKE=['Product Maker','ITOPS Admin'], CAN_CHECK=['Product Checker','ITOPS Admin'];
+const MAX_IMG_MB=1;
+
+const uri=s=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+const cardV=(org,seg,c1,c2)=>uri(`<svg xmlns="http://www.w3.org/2000/svg" width="220" height="350" viewBox="0 0 220 350">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+<rect width="220" height="350" fill="url(#g)"/><rect x="18" y="26" width="184" height="40" fill="#fff" opacity=".92"/>
+<text x="110" y="53" font-family="Segoe UI,Arial" font-size="19" font-weight="700" fill="${c1}" text-anchor="middle">${org}</text>
+<rect x="60" y="86" width="100" height="120" fill="#fff" opacity=".85"/>
+<circle cx="110" cy="128" r="24" fill="#c9cede"/><path d="M78 200c8-26 56-26 64 0z" fill="#c9cede"/>
+<text x="110" y="232" font-family="Segoe UI,Arial" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">${seg}</text>
+<rect x="18" y="248" width="184" height="1" fill="#fff" opacity=".6"/>
+<text x="26" y="272" font-family="Segoe UI,Arial" font-size="10" fill="#fff">Khoá/Duration : YYYY-YYYY</text>
+<text x="26" y="290" font-family="Segoe UI,Arial" font-size="10" fill="#fff">MSSV/ID : 000000000</text>
+<rect x="0" y="304" width="220" height="46" fill="#fff" opacity=".16"/>
+<text x="26" y="333" font-family="Segoe UI,Arial" font-size="15" font-weight="700" fill="#fff">Vikki</text>
+<circle cx="172" cy="327" r="13" fill="#eb001b" opacity=".9"/><circle cx="188" cy="327" r="13" fill="#f79e1b" opacity=".9"/></svg>`);
+const cardH=(org,c1,c2)=>uri(`<svg xmlns="http://www.w3.org/2000/svg" width="340" height="215" viewBox="0 0 340 215">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+<rect width="340" height="215" rx="10" fill="url(#g)"/>
+<rect x="22" y="26" width="120" height="30" rx="4" fill="#fff" opacity=".9"/>
+<text x="82" y="47" font-family="Segoe UI,Arial" font-size="14" font-weight="700" fill="${c1}" text-anchor="middle">${org}</text>
+<text x="22" y="150" font-family="Segoe UI,Arial" font-size="18" font-weight="700" fill="#fff">VikkiONE</text>
+<circle cx="272" cy="160" r="21" fill="#eb001b" opacity=".9"/><circle cx="298" cy="160" r="21" fill="#f79e1b" opacity=".9"/></svg>`);
+const banner=(txt,c1,c2)=>uri(`<svg xmlns="http://www.w3.org/2000/svg" width="480" height="180" viewBox="0 0 480 180">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+<rect width="480" height="180" fill="url(#g)"/>
+<text x="28" y="76" font-family="Segoe UI,Arial" font-size="22" font-weight="700" fill="#fff">${txt}</text>
+<text x="28" y="106" font-family="Segoe UI,Arial" font-size="14" fill="#fff" opacity=".9">Mở thẻ để chạm công, ra ưu đãi ngay!</text>
+<rect x="28" y="124" width="120" height="30" rx="15" fill="#fff"/>
+<text x="88" y="144" font-family="Segoe UI,Arial" font-size="13" font-weight="600" fill="${c1}" text-anchor="middle">Mở thẻ ngay</text></svg>`);
+const phoneShot=(t,c)=>uri(`<svg xmlns="http://www.w3.org/2000/svg" width="220" height="400" viewBox="0 0 220 400">
+<rect width="220" height="400" fill="#f2f3f7"/><rect width="220" height="26" fill="#fff"/>
+<text x="12" y="18" font-family="Segoe UI,Arial" font-size="10" fill="#333">9:41</text>
+<rect x="12" y="36" width="196" height="86" rx="8" fill="${c}"/>
+<text x="24" y="66" font-family="Segoe UI,Arial" font-size="10" font-weight="700" fill="#fff">${t}</text>
+<rect x="24" y="86" width="70" height="20" rx="10" fill="#fff"/>
+<rect x="12" y="136" width="196" height="180" rx="8" fill="#dfe3ee"/>
+<rect x="0" y="366" width="220" height="34" fill="#fff"/></svg>`);
+
+const SAMPLE_SVG=`<svg xmlns="http://www.w3.org/2000/svg" width="330" height="520" viewBox="0 0 330 520">
+  <rect width="330" height="520" fill="#ffffff"/>
+  <text x="165" y="58" font-family="Arial" font-size="40" font-weight="700" fill="#0b57a4" text-anchor="middle">UEF</text>
+  <text x="165" y="82" font-family="Arial" font-size="12" font-weight="700" fill="#d0021b" text-anchor="middle">ĐẠI HỌC KINH TẾ TÀI CHÍNH</text>
+  <rect x="95" y="130" width="140" height="150" fill="#e6e8ef" stroke="#f5a623" stroke-width="4"/>
+  <image x="95" y="130" width="140" height="150" href="{{avatar_image}}" preserveAspectRatio="xMidYMid slice"/>
+  <text x="165" y="312" font-family="Arial" font-size="20" font-weight="700" fill="#d0021b" text-anchor="middle">THẺ SINH VIÊN</text>
+  <rect x="0" y="322" width="330" height="34" fill="#0b57a4"/>
+  <text x="165" y="346" font-family="Arial" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">{{customer_full_name}}</text>
+  <text x="24" y="382" font-family="Arial" font-size="13" font-weight="700" fill="#0b57a4">Khoá/Duration</text>
+  <text x="200" y="382" font-family="Arial" font-size="13" fill="#0b57a4">: {{duration}}</text>
+  <text x="24" y="406" font-family="Arial" font-size="13" font-weight="700" fill="#0b57a4">MSSV/Student ID</text>
+  <text x="200" y="406" font-family="Arial" font-size="13" fill="#0b57a4">: {{employee_id}}</text>
+  <text x="24" y="430" font-family="Arial" font-size="13" font-weight="700" fill="#0b57a4">Ngày sinh/DOB</text>
+  <text x="200" y="430" font-family="Arial" font-size="13" fill="#0b57a4">: {{customer_dob}}</text>
+  <rect x="0" y="446" width="330" height="74" fill="#7b2ff7"/>
+  <text x="24" y="492" font-family="Arial" font-size="22" font-weight="700" fill="#ffffff">Vikki</text>
+  <circle cx="250" cy="484" r="22" fill="#eb001b"/><circle cx="282" cy="484" r="22" fill="#f79e1b"/>
+</svg>`;
+const AVATAR_PH=uri(`<svg xmlns="http://www.w3.org/2000/svg" width="140" height="150"><rect width="140" height="150" fill="#cfd4e2"/><circle cx="70" cy="58" r="28" fill="#9aa1b5"/><path d="M22 150c6-38 90-38 96 0z" fill="#9aa1b5"/></svg>`);
+
+/* ================= Organization List (nguồn tham chiếu) ================= */
+const ORGS=[
+  {code:'AXIS',tax:'0302287334',shortVi:'Axis Research'},
+  {code:'UEF',tax:'0305515934',shortVi:'ĐH Kinh tế - Tài chính'},
+  {code:'DAMTC',tax:'0302391568',shortVi:'Kiều Hối Đông Á'},
+  {code:'KIMNGANREAL',tax:'0310897492',shortVi:'Dịch vụ QL BĐS Kim Ngân'},
+  {code:'HDBANK',tax:'0300608092',shortVi:'Ngân hàng HDBank'},
+  {code:'VIKKI_BANK',tax:'0301442379',shortVi:'Ngân hàng Vikki Bank'},
+  {code:'SOVICO',tax:'0101205067',shortVi:'Sovico'},
+  {code:'VICTORIA_SCHOOL',tax:'0318601242',shortVi:'Victoria School'},
+  {code:'VIKKIBANKS',tax:'0302941973',shortVi:'VikkiBankS'},
+  {code:'VIKKAFE',tax:'0318918698',shortVi:'VIKKAFE'}
+].sort((a,b)=>a.shortVi.localeCompare(b.shortVi,'vi'));
+const orgBy=c=>ORGS.find(o=>o.code===c);
+/* nhãn hiển thị: <org_short_name_vi> - <org_code> - <org_tax_code> */
+const orgLabel=o=>o?`${o.shortVi} - ${o.code} - ${o.tax}`:'—';
+const orgByLabel=l=>ORGS.find(o=>orgLabel(o)===String(l).trim());
+
+/* ================= seed ================= */
+const PS=(orgCode,name,code,way4,c1,c2,seg,extra={})=>({
+  orgCode,name,code,way4,
+  bannerVi:banner(name,c1,c2),bannerEn:banner(name,c1,c2),
+  cardVertical:cardV(orgBy(orgCode).shortVi.split(' ').pop(),seg,c1,c2),
+  cardHorizontal:cardH(orgBy(orgCode).shortVi.split(' ').pop(),c1,c2),
+  template:'template_'+code.toLowerCase()+'.svg',templateSvg:SAMPLE_SVG,templatePreview:null,
+  createdAt:'05:04:45 28/07/2026',createdBy:'',updatedAt:'05:04:45 28/07/2026',updatedBy:'',...extra});
+
+const seed=()=>({
+  schemes:[
+    PS('UEF','UEF SINH VIÊN','VIKKI_ONE_CONNECT_UEF_STUDENT','VK0305515934S','#0b57a4','#4aa3f0','THẺ SINH VIÊN'),
+    PS('UEF','UEF GIẢNG VIÊN','VIKKI_ONE_CONNECT_UEF_TEACHER','VK0305515934E','#0b57a4','#6fbcf7','THẺ GIẢNG VIÊN'),
+    PS('VICTORIA_SCHOOL','VICTORIA SCHOOL - NHÂN VIÊN','VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE','VK0318601242E','#1a7a5e','#4fc39b','THẺ NHÂN VIÊN'),
+    PS('HDBANK','HDBANK - NHÂN VIÊN','VIKKI_ONE_CONNECT_HDBANK_EMPLOYEE','VK0300608092E','#d0021b','#f5723a','THẺ NHÂN VIÊN'),
+    PS('SOVICO','SOVICO - BOM','VIKKI_ONE_CONNECT_SOVICO_BOM','VK0101205067B','#3b2f83','#8a63d2','THẺ BOM'),
+    PS('VIKKI_BANK','VIKKI BANK - BOM','VIKKI_ONE_CONNECT_VIKKIBANK_BOM','VK0301442379B','#7b2ff7','#c06cf8','THẺ BOM')
+  ],
+  cases:[
+    {id:'DMC17901234567890123',type:'Add new Card Product Scheme',
+     narrative:'Mở tệp khách hàng mới cho Axis Group theo hợp đồng ký ngày 05/08/2026',
+     maker:'Product Maker',checker:'',decision:'Waiting for approval',status:'Open',
+     createdAt:'09:14 12/08/2026',updatedAt:'09:14 12/08/2026',reason:'',key:'VIKKI_ONE_CONNECT_AXIS_EMPLOYEE',
+     before:null,
+     after:{orgCode:'AXIS',name:'AXIS - NHÂN VIÊN',code:'VIKKI_ONE_CONNECT_AXIS_EMPLOYEE',way4:'VK0302287334E',
+       bannerVi:banner('AXIS','#0f7a8a','#4fc7d6'),bannerEn:banner('AXIS','#0f7a8a','#4fc7d6'),
+       cardVertical:cardV('AXIS','THẺ NHÂN VIÊN','#0f7a8a','#4fc7d6'),
+       cardHorizontal:cardH('AXIS','#0f7a8a','#4fc7d6'),
+       template:'axis_employee.svg',templateSvg:SAMPLE_SVG,templatePreview:null}},
+    {id:'DMC17898765432109876',type:'Update Card Product Scheme',
+     narrative:'Cập nhật banner và ảnh thẻ theo nhận diện học kỳ mới của UEF',
+     maker:'Product Maker',checker:'Product Checker',decision:'Approved',status:'Closed',
+     createdAt:'14:02 08/08/2026',updatedAt:'15:31 08/08/2026',reason:'',
+     key:'VIKKI_ONE_CONNECT_UEF_STUDENT',
+     before:{orgCode:'UEF',name:'UEF SINH VIEN',code:'VIKKI_ONE_CONNECT_UEF_STUDENT',way4:'VK0305515934S',
+       bannerVi:banner('UEF','#1c4f8f','#3d7fd0'),bannerEn:banner('UEF','#1c4f8f','#3d7fd0'),
+       cardVertical:cardV('UEF','THẺ SINH VIÊN','#1c4f8f','#3d7fd0'),
+       cardHorizontal:cardH('UEF','#1c4f8f','#3d7fd0'),
+       template:'uef_student_v1.svg',templateSvg:SAMPLE_SVG,templatePreview:null},
+     after:{orgCode:'UEF',name:'UEF SINH VIÊN',code:'VIKKI_ONE_CONNECT_UEF_STUDENT',way4:'VK0305515934S',
+       bannerVi:banner('UEF','#0b57a4','#4aa3f0'),bannerEn:banner('UEF','#0b57a4','#4aa3f0'),
+       cardVertical:cardV('UEF','THẺ SINH VIÊN','#0b57a4','#4aa3f0'),
+       cardHorizontal:cardH('UEF','#0b57a4','#4aa3f0'),
+       template:'uef_student_v2.svg',templateSvg:SAMPLE_SVG,templatePreview:null}},
+    {id:'DMC17890001112223334',type:'Update Card Product Scheme',
+     narrative:'Đổi ảnh thẻ dọc theo yêu cầu của Victoria School',
+     maker:'Product Maker',checker:'Product Checker',decision:'Rejected',status:'Closed',
+     createdAt:'10:20 02/08/2026',updatedAt:'11:05 02/08/2026',
+     reason:'Ảnh thẻ dọc chưa đúng quy cách tỷ lệ trong tài liệu Design. Đề nghị xuất lại rồi tạo case mới.',
+     key:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',
+     before:{orgCode:'VICTORIA_SCHOOL',name:'VICTORIA SCHOOL - NHÂN VIÊN',
+       code:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',way4:'VK0318601242E',
+       bannerVi:banner('VICTORIA','#1a7a5e','#4fc39b'),bannerEn:banner('VICTORIA','#1a7a5e','#4fc39b'),
+       cardVertical:cardV('VICTORIA','THẺ NHÂN VIÊN','#1a7a5e','#4fc39b'),
+       cardHorizontal:cardH('VICTORIA','#1a7a5e','#4fc39b'),
+       template:'victoria_employee.svg',templateSvg:SAMPLE_SVG,templatePreview:null},
+     after:{orgCode:'VICTORIA_SCHOOL',name:'VICTORIA SCHOOL - NHÂN VIÊN',
+       code:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',way4:'VK0318601242E',
+       bannerVi:banner('VICTORIA','#1a7a5e','#4fc39b'),bannerEn:banner('VICTORIA','#1a7a5e','#4fc39b'),
+       cardVertical:cardV('VICTORIA','NHÂN VIÊN','#6b4f1a','#d4a03c'),
+       cardHorizontal:cardH('VICTORIA','#1a7a5e','#4fc39b'),
+       template:'victoria_employee.svg',templateSvg:SAMPLE_SVG,templatePreview:null}}
+  ]
+});
+
+let db=seed(), me='Product Maker', tab='ps', sub='list',
+    caseTab='Waiting for approval', filters={}, openCase=null, draft=null;
+
+/* ================= helpers ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const now=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return `${p(d.getHours())}:${p(d.getMinutes())} ${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()}`};
+const newCaseId=()=>'DMC'+Date.now()+Math.floor(Math.random()*90+10);
+const canMake=()=>CAN_MAKE.includes(me), canCheck=()=>CAN_CHECK.includes(me);
+const schemeBy=c=>db.schemes.find(s=>s.code===c);
+const pendingFor=k=>db.cases.find(c=>c.status==='Open'&&c.key===k);
+const caseById=i=>db.cases.find(c=>c.id===i);
+function toast(m,k){const el=document.createElement('div');el.className=k||'';el.textContent=m;
+  $('#toast').appendChild(el);setTimeout(()=>el.remove(),4800)}
+const parseVars=svg=>[...new Set([...String(svg).matchAll(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g)].map(m=>m[1]))];
+
+/* ================= shell ================= */
+function render(){
+  $('#roleSel').value=me;
+  $('#roleHint').textContent =
+    me==='Product Maker'?'· tạo case, không được duyệt'
+   :me==='Product Checker'?'· duyệt/từ chối, không tạo case'
+   :me==='ITOPS Admin'?'· tạo và duyệt, nhưng không tự duyệt case của mình'
+   :'· chỉ xem và tải xuống';
+  const nav=['Deposit Configuration','Card Configuration','Overdraft Management',
+    'VikkiONE Create/Delete WhiteList Case','Data Configuration','Reward Management'];
+  $('#topnav').innerHTML=nav.map(n=>`<button class="${n==='Data Configuration'&&!openCase?'on':''}">${n}</button>`).join('')
+    +(openCase?`<button class="casetab" data-closecase>${esc(openCase)} <i>×</i></button>`:'');
+  $('#root').innerHTML=openCase?detailPage(openCase):mainPage();
+  bind();
+}
+function mainPage(){
+  return `<div class="page">
+    <div class="card"><h2>Data Configuration</h2></div>
+    <div class="tabs1" id="tabs1">
+      <button data-tab="branch" class="${tab==='branch'?'on':''}">Branch List</button>
+      <button data-tab="org" class="${tab==='org'?'on':''}">Organization List</button>
+      <button data-tab="ps" class="${tab==='ps'?'on':''}">Card Product Scheme</button>
+    </div>
+    <div class="panel">${tab==='ps'?psView():
+      `<div class="note info"><b>Ngoài phạm vi tài liệu này</b>
+       ${tab==='branch'?'Branch List':'Organization List'} có SRS riêng.
+       Mockup này chỉ mô tả màn hình Card Product Scheme.</div>`}</div></div>`;
+}
+function psView(){
+  return `<div class="tabs2">
+    <button data-sub="list" class="${sub==='list'?'on':''}">Card Product Scheme</button>
+    <button data-sub="cases" class="${sub==='cases'?'on':''}">Card Product Scheme Cases</button>
+  </div>${sub==='list'?listView():casesView()}`;
+}
+
+/* ================= grid ================= */
+function listView(){
+  const rows=db.schemes.filter(s=>{
+    const q=(k,v)=>!(filters[k]||'').trim()||String(v??'').toLowerCase().includes(filters[k].trim().toLowerCase());
+    return (!filters.org||s.orgCode===filters.org)&&q('name',s.name)&&q('code',s.code)&&q('way4',s.way4);
+  });
+  const body=rows.length?rows.map((s,i)=>{
+    const o=orgBy(s.orgCode);
+    return `<tr>
+      <td>${i+1}</td>
+      <td><img class="thumb" src="${s.cardVertical}" alt="Card ${esc(s.name)}"></td>
+      <td>${esc(o.shortVi)}</td><td>${esc(o.tax)}</td>
+      <td><b>${esc(s.name)}</b></td>
+      <td class="code">${esc(s.code)}</td>
+      <td class="code">${esc(s.way4)}</td>
+      <td>${esc(s.createdAt)}</td><td>${esc(s.createdBy)||'—'}</td>
+      <td>${esc(s.updatedAt)}</td><td>${esc(s.updatedBy)||'—'}</td>
+      <td>${rowAction(s.code)}</td></tr>`}).join('')
+    :`<tr><td colspan="12" class="empty">No card product schemes match your filters. Clear a filter to see more results.</td></tr>`;
+  return `<div class="toolbar"><div class="filters">
+      <select data-filter="org"><option value="">Filter by Organization</option>
+        ${ORGS.map(o=>`<option value="${o.code}" ${filters.org===o.code?'selected':''}>${esc(orgLabel(o))}</option>`).join('')}</select>
+      <input data-filter="name" placeholder="Filter by Card Product Scheme Name" value="${esc(filters.name||'')}">
+      <input data-filter="code" placeholder="Filter by Card Product Scheme Code" value="${esc(filters.code||'')}">
+      <input data-filter="way4" placeholder="Filter by Way4 Classifier Value Code" value="${esc(filters.way4||'')}">
+    </div><div class="actions">
+      ${canMake()?`<button class="btn primary" data-act="create">Create Case</button>`:''}
+      <button class="btn" data-act="download">⤓ Download</button></div></div>
+    <div class="tablewrap"><table><thead><tr>
+      ${['No','Card Preview','Organization','Org tax code','Card Product Scheme Name','Card Product Scheme Code',
+         'Way4 Classifier Value Code','Created At','Created By','Updated At','Updated By']
+        .map(h=>`<th><span class="aa">Aa</span>${h}</th>`).join('')}
+      <th>Thao tác</th></tr></thead><tbody>${body}</tbody></table></div>
+    <div class="count">${rows.length} card product scheme · không có thao tác xóa theo mục 9.2 của SRS</div>`;
+}
+function rowAction(code){
+  if(!canMake()) return '<span class="help">—</span>';
+  const p=pendingFor(code);
+  if(p) return `<span class="chip amber" title="Case ${p.id}">Đang chờ duyệt</span>`;
+  return `<button class="btn sm" data-edit="${esc(code)}">Sửa</button>`;
+}
+
+/* ================= cases ================= */
+function casesView(){
+  const list=db.cases.filter(c=>c.decision===caseTab);
+  const body=list.length?list.map(c=>`<tr class="clickable" data-case="${esc(c.id)}">
+      <td>${esc(c.id)}</td>
+      <td><span class="chip ${c.status==='Open'?'green':'grey'}">${c.status}</span></td>
+      <td><span class="chip ${/Update/.test(c.type)?'blue':'green'}">${esc(c.type)}</span></td>
+      <td class="wrap">${esc(c.narrative)}</td>
+      <td><span class="avatar">${esc(c.maker[0])}</span>${esc(c.maker)}</td>
+      <td>${c.checker?`<span class="avatar">${esc(c.checker[0])}</span>${esc(c.checker)}`:'—'}</td>
+      <td><span class="chip ${c.decision==='Approved'?'green':c.decision==='Rejected'?'red':'amber'}">${esc(c.decision)}</span></td>
+      <td>${esc(c.createdAt)}</td></tr>`).join('')
+    :`<tr><td colspan="8" class="empty">No requests in this status yet.</td></tr>`;
+  return `<div class="toolbar" style="margin-bottom:6px"><div></div><div class="actions">
+      ${canMake()?`<button class="btn primary" data-act="create">Create Case</button>`:''}</div></div>
+    <div class="tabs3">${['Waiting for approval','Approved','Rejected']
+      .map(t=>`<button data-ctab="${t}" class="${caseTab===t?'on':''}">${t}</button>`).join('')}</div>
+    <div class="tablewrap"><table><thead><tr>
+      ${['Case ID','Status','Business Type','Narrative','Maker By','Checker By','Checker Decision','Created At']
+        .map(h=>`<th><span class="aa">Aa</span>${h}</th>`).join('')}
+      </tr></thead><tbody>${body}</tbody></table></div>
+    <div class="count">${list.length} case · click vào dòng bất kỳ để mở Case Detail</div>`;
+}
+
+/* ================= case detail ================= */
+const FLD={orgCode:'Organization',name:'Card Product Scheme Name',
+  code:'Card Product Scheme Code',way4:'Way4 Classifier Value Code'};
+const ASSETS=[['bannerVi','Card List Banner Image (Vi)'],['bannerEn','Card List Banner Image (En)'],
+  ['cardVertical','Hình thẻ Dọc (Ảnh Tĩnh)'],['cardHorizontal','Hình thẻ Ngang (Ảnh Tĩnh)']];
+
+function detailPage(id){
+  const c=caseById(id), a=c.after||{}, b=c.before||null;
+  const mine=c.maker===me, act=c.status==='Open'&&canCheck()&&!mine;
+  const fv=(k,v)=>k==='orgCode'?esc(orgLabel(orgBy(v))):esc(v||'—');
+  const field=k=>{
+    const ch=b&&JSON.stringify(b[k])!==JSON.stringify(a[k]);
+    return `<div class="m ${k==='orgCode'||k==='code'?'span2':''} ${ch?'changed':''}">
+      <div class="lbl">${FLD[k]}</div><div class="val">${fv(k,a[k])}</div>
+      ${ch?`<div class="orig"><b>Original:</b> ${fv(k,b[k])}</div>`:''}</div>`};
+  const asset=([k,l])=>{
+    const ch=b&&b[k]!==a[k];
+    return `<div class="asset"><div class="lbl">${l}</div>
+      ${a[k]?`<img src="${a[k]}" alt="${l}">`:'<span class="help">—</span>'}
+      ${ch?`<div class="origwrap"><div class="orig"><b>Original:</b></div>
+        ${b[k]?`<img src="${b[k]}" alt="${l} cũ" style="margin-top:6px">`:'<span class="help">—</span>'}</div>`:''}</div>`};
+  const tplCh=b&&b.template!==a.template;
+  const vars=parseVars(a.templateSvg||'');
+  let why='';
+  if(c.status==='Open'&&!canCheck()) why='Tài khoản hiện tại không có quyền phê duyệt yêu cầu.';
+  else if(c.status==='Open'&&mine) why='Bạn không thể phê duyệt yêu cầu do chính mình tạo. Một tài khoản có quyền duyệt khác phải xử lý case này.';
+
+  return `<div class="page detail">
+    <div class="block">
+      <div class="dhead"><button class="back" data-closecase>‹</button><h2>Case Detail</h2></div>
+      <div class="meta">
+        <div class="m"><div class="lbl">Case ID</div><div class="val">${esc(c.id)}</div></div>
+        <div class="m"><div class="lbl">Status</div><div class="val"><span class="chip ${c.status==='Open'?'green':'grey'}">${c.status}</span></div></div>
+        <div class="m"><div class="lbl">Business Type</div><div class="val"><span class="chip ${/Update/.test(c.type)?'blue':'green'}">${esc(c.type)}</span></div></div>
+        <div class="m"><div class="lbl">Narrative</div><div class="val">${esc(c.narrative)}</div></div>
+        <div class="m"><div class="lbl">Maker By</div><div class="val"><span class="avatar">${esc(c.maker[0])}</span>${esc(c.maker)}</div></div>
+        <div class="m"><div class="lbl">Checker By</div><div class="val">${c.checker?`<span class="avatar">${esc(c.checker[0])}</span>${esc(c.checker)}`:'—'}</div></div>
+        <div class="m"><div class="lbl">Checker Decision</div><div class="val"><span class="chip ${c.decision==='Approved'?'green':c.decision==='Rejected'?'red':'amber'}">${esc(c.decision)}</span></div></div>
+        <div class="m"><div class="lbl">Created At</div><div class="val">${esc(c.createdAt)}</div></div>
+        <div class="m"><div class="lbl">Updated At</div><div class="val">${esc(c.updatedAt||'—')}</div></div>
+      </div>
+      ${c.reason?`<div class="note stop" style="margin:20px 0 0"><b>Lý do từ chối</b>${esc(c.reason)}</div>`:''}
+    </div>
+
+    <div class="block"><h3>Thông tin chung</h3>
+      <div class="meta">${['orgCode','name','code','way4'].map(field).join('')}</div></div>
+
+    <div class="block"><h3>Hình ảnh cấu hình</h3>
+      <div class="assets">${ASSETS.map(asset).join('')}</div></div>
+
+    <div class="block"><h3>Card Face Design Template</h3>
+      <div class="row3">
+        <div>
+          <div class="m ${tplCh?'changed':''}"><div class="lbl">Template file</div>
+            <div class="val">📎 ${esc(a.template||'—')}</div>
+            ${tplCh?`<div class="orig"><b>Original:</b> 📎 ${esc(b.template||'—')}</div>`:''}</div>
+          <div class="lbl" style="margin-top:18px;font-size:12.5px;color:var(--ink-3)">Biến parse được từ template</div>
+          <ol class="varlist">${vars.map(v=>`<li>{{${esc(v)}}}</li>`).join('')||'<li>—</li>'}</ol>
+        </div>
+        <div><div class="lbl" style="font-size:12.5px;color:var(--ink-3);margin-bottom:7px">Mặt thẻ Maker đã render</div>
+          <div class="cardprev">${a.templatePreview?`<img src="${a.templatePreview}" alt="Card face preview">`
+            :renderTplImg(a.templateSvg||SAMPLE_SVG,SAMPLE_VAL)}</div></div>
+      </div></div>
+
+    ${why?`<div class="block"><div class="note info" style="margin:0">${esc(why)}</div></div>`:''}
+    ${act?`<div class="block"><h3>Quyết định phê duyệt</h3>
+      <div class="f" data-field="reason"><label>Lý do từ chối <span class="help">(bắt buộc khi Reject)</span></label>
+        <textarea name="reason" placeholder="Nhập lý do nếu từ chối..."></textarea><span class="err"></span></div>
+      <div class="decision" style="margin-top:16px">
+        <button class="btn danger" data-reject="${esc(c.id)}">Reject</button>
+        <button class="btn primary" data-approve="${esc(c.id)}">Approve</button></div></div>`:''}
+  </div>`;
+}
+function renderTplImg(svg,vals){
+  let s=String(svg);
+  parseVars(s).forEach(v=>{
+    const val=v==='avatar_image'?AVATAR_PH:(vals[v]!==undefined?vals[v]:'');
+    s=s.replaceAll(`{{${v}}}`,String(val).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])));
+  });
+  return `<img src="${uri(s)}" alt="Card face preview">`;
+}
+
+/* ================= modal form ================= */
+function openModal(h){$('#modal').innerHTML=h;$('#backdrop').classList.add('on');bindModal()}
+function closeModal(){$('#backdrop').classList.remove('on');$('#modal').innerHTML='';draft=null}
+
+const specLine=()=>`<span class="speclink">📐 <a href="${SPEC_LINK.url}" target="_blank" rel="noopener">Quy cách kích thước ảnh — xem tài liệu mới nhất ↗</a>
+  <span>· Cập nhật lần cuối: ${SPEC_LINK.updated}</span></span>`;
+const dropBox=(key,label,val)=>`<div class="f c3" data-field="${key}">
+  <label><span class="req">*</span>${label}</label>
+  <div id="slot-${key}">${val?shot(key,val):dropEl(key)}</div><span class="err"></span></div>`;
+const dropEl=key=>`<label class="drop" for="in-${key}">
+  <div class="ic">🖼</div><div class="t">Nhấp hoặc kéo thả vào khu vực này để tải lên</div>
+  <div class="s">Hỗ trợ các định dạng tệp JPG, JPEG, PNG, GIF, WEBP. File size: &lt;= 1MB.</div>
+  <input type="file" id="in-${key}" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" data-img="${key}"></label>`;
+const shot=(key,src)=>`<div class="shot"><img src="${src}" alt="">
+  <div class="tools"><button type="button" data-view="${key}">👁</button>
+  <button type="button" data-clear="${key}">🗑</button></div></div>`;
+
+function psForm(mode,s){
+  const x=s||{};
+  draft={mode,key:x.code||'',orgCode:x.orgCode||'',previewDone:!!s,
+    templateSvg:x.templateSvg||null,templateName:x.template||null,templatePreview:x.templatePreview||null,
+    imgs:{bannerVi:x.bannerVi||null,bannerEn:x.bannerEn||null,
+      cardVertical:x.cardVertical||null,cardHorizontal:x.cardHorizontal||null}};
+  const ro=mode==='update';
+  return `<header><h3>${mode==='create'?'Tạo mới Card Product Scheme':'Cập nhật Card Product Scheme'}</h3>
+      <button class="x" data-close>×</button></header>
+  <div class="body">
+    <div class="group"><div class="gh">Request Information</div><div class="gb">
+      <div class="fields">
+        <div class="f"><label>Business type</label>
+          <input value="${mode==='create'?'Add new Card Product Scheme':'Update Card Product Scheme'}" disabled></div>
+        <div class="f c2" data-field="narrative"><label><span class="req">*</span>Narrative</label>
+          <textarea name="narrative" placeholder="Nhập diễn giải cho yêu cầu này..."></textarea><span class="err"></span></div>
+      </div></div></div>
+
+    <div class="group"><div class="gh">Thông tin chung</div><div class="gb">
+      ${ro?`<div class="note info"><b>Organization, Card Product Scheme Code and Way4 code cannot be changed</b>
+        These values identify the customer segment across the mobile app and the card system, and stay fixed once approved.
+        If a different code is needed, create a new card product scheme and stop issuing new cards under this one.</div>`:''}
+      <div class="fields">
+        <div class="f c2" data-field="orgCode"><label><span class="req">*</span>Organization</label>
+          <input name="orgLabel" list="orgList" value="${ro?esc(orgLabel(orgBy(x.orgCode))):''}" ${ro?'disabled':''}
+            placeholder="Gõ tên, mã tổ chức hoặc mã số thuế để tìm...">
+          <datalist id="orgList">${ORGS.map(o=>`<option value="${esc(orgLabel(o))}"></option>`).join('')}</datalist>
+          <span class="err"></span>
+          <span class="help">Chỉ tổ chức đã phê duyệt và đang hoạt động. Hiển thị theo
+            <b>&lt;org_short_name_vi&gt; - &lt;org_code&gt; - &lt;org_tax_code&gt;</b></span></div>
+        <div class="f" data-field="name"><label><span class="req">*</span>Card Product Scheme Name</label>
+          <input name="name" value="${esc(x.name||'')}" placeholder="VD: UEF SINH VIÊN"><span class="err"></span>
+          <span class="help">Tên thân thiện, tối đa 100 ký tự.${ro?' Được phép sửa.':''}</span></div>
+        <div class="f" data-field="code"><label><span class="req">*</span>Card Product Scheme Code</label>
+          <input name="code" value="${esc(x.code||'')}" ${ro?'disabled':''}
+            placeholder="Vui lòng nhập mã Card Product Scheme Code"><span class="err"></span>
+          <span class="help">example: VIKKI_ONE_CONNECT_UEF_STUDENT</span></div>
+        <div class="f c2" data-field="way4"><label><span class="req">*</span>Way4 Classifier Value Code</label>
+          <input name="way4" value="${esc(x.way4||'')}" ${ro?'disabled':''}
+            placeholder="Vui lòng nhập mã Classifier tương ứng trên Way4"><span class="err"></span>
+          <span class="help">Cấu trúc chung: <b>VK${'$'}{org_tax_code}${'$'}{segment}</b>
+            <span id="way4hint"></span></span></div>
+      </div></div></div>
+
+    <div class="group"><div class="gh">Card List Banner Image ${specLine()}</div><div class="gb">
+      <div class="row2">
+        <div><div class="phone"><img src="${phoneShot('Thẻ VikkiONE Connect','#7b2ff7')}" alt=""></div>
+          <div class="phcap">Vị trí banner trên card list</div></div>
+        <div class="fields">
+          ${dropBox('bannerVi','Card List Banner Image (Vi)',draft.imgs.bannerVi)}
+          ${dropBox('bannerEn','Card List Banner Image (En)',draft.imgs.bannerEn)}
+        </div></div></div></div>
+
+    <div class="group"><div class="gh">Card Design (Static Image) ${specLine()}</div><div class="gb">
+      <div class="fields">
+        <div class="c2">${dropBox('cardVertical','Hình thẻ Dọc (Ảnh Tĩnh)',draft.imgs.cardVertical)}
+          <span class="help">Hiển thị: offer credit limit (ký eSign), kích hoạt thẻ vật lý thành công</span></div>
+        <div><div class="phone"><img src="${phoneShot('Thẻ cứng đã sẵn sàng','#d0021b')}" alt=""></div>
+          <div class="phcap">Màn hình dùng ảnh thẻ dọc</div></div>
+        <div class="c2">${dropBox('cardHorizontal','Hình thẻ Ngang (Ảnh Tĩnh)',draft.imgs.cardHorizontal)}
+          <span class="help">Hiển thị: card list, popup chọn tổ chức nâng hạn mức, offer credit limit</span></div>
+        <div><div class="phone"><img src="${phoneShot('Thẻ kép','#7b2ff7')}" alt=""></div>
+          <div class="phcap">Màn hình dùng ảnh thẻ ngang</div></div>
+      </div></div></div>
+
+    <div class="group"><div class="gh">Card Face Design Template</div><div class="gb">
+      <div class="fields">
+        <div class="f" data-field="template"><label><span class="req">*</span>Up template SVG</label>
+          <div id="tplSlot">${draft.templateName
+            ? `<div class="exval">📎 ${esc(draft.templateName)}<button type="button" data-cleartpl style="margin-left:auto">🗑</button></div>`
+            : `<label class="drop" for="in-tpl"><div class="ic">📄</div>
+                 <div class="t">Tải lên file .svg do đội Design export</div>
+                 <div class="s">Template phẳng, không bo góc, chứa layout và các biến dữ liệu</div>
+                 <input type="file" id="in-tpl" accept=".svg,image/svg+xml"></label>`}</div>
+          <span class="err"></span>
+          <span class="help"><a href="${TPL_GUIDE.url}" target="_blank" rel="noopener">Xem hướng dẫn cách thiết kế template ↗</a>
+            · <a href="#" data-sample>dùng template mẫu để thử</a></span>
+          <div id="varBox" style="margin-top:14px">${draft.templateSvg?varBoxHtml(parseVars(draft.templateSvg)):''}</div>
+        </div>
+        <div class="f" data-field="preview"><label>Preview Value</label>
+          <textarea name="previewValue" style="min-height:120px"
+            placeholder="Dán chuỗi Example value rồi thay bằng dữ liệu thật...">${draft.templateSvg?exampleStr(parseVars(draft.templateSvg)):''}</textarea>
+          <span class="err"></span>
+          <button class="btn primary" type="button" data-preview style="margin-top:10px;align-self:flex-start">Preview Output</button>
+        </div>
+        <div class="f"><label>Hình ảnh thực tế hiển thị lên Mobile App</label>
+          <div class="cardprev" id="tplPreview">${draft.templatePreview
+            ? `<img src="${draft.templatePreview}" alt="Card face preview">`:'Chạy Preview Output để xem mặt thẻ'}</div></div>
+      </div>
+      <div class="note warn" style="margin:16px 0 0"><b>Danh mục biến chuẩn (cố định)</b>
+        ${STD_VARS.map(v=>`<code>{{${v[0]}}}</code>`).join(' ')}<br>
+        Template chứa biến ngoài danh mục sẽ bị từ chối. Phải chạy Preview Output thành công ít nhất một lần trước khi gửi duyệt.</div>
+    </div></div>
+  </div>
+  <footer><div class="right"><button class="btn" data-close>Huỷ</button>
+    <button class="btn primary" data-submit>Xác nhận</button></div></footer>`;
+}
+const exampleStr=vars=>vars.map(v=>`${v}:${SAMPLE_VAL[v]!==undefined?SAMPLE_VAL[v]:'value'}`).join(';');
+const varBoxHtml=vars=>`<div class="lbl" style="font-size:12.5px;color:var(--ink-3)">Các biến parse được từ template bạn vừa upload</div>
+  <ol class="varlist">${vars.map(v=>`<li>{{${esc(v)}}}</li>`).join('')}</ol>
+  <div class="lbl" style="font-size:12.5px;color:var(--ink-3);margin:12px 0 5px">Example value</div>
+  <div class="exval">${esc(exampleStr(vars))}<button type="button" data-copy="${esc(exampleStr(vars))}">⧉</button></div>`;
+
+/* ================= validate & submit ================= */
+function fail(n,code,msg){const f=document.querySelector(`[data-field="${n}"]`);if(!f)return;
+  f.classList.add('bad');f.querySelector('.err').innerHTML=`<code>${code}</code> ${esc(msg)}`}
+function clearErrors(){document.querySelectorAll('.f.bad').forEach(f=>f.classList.remove('bad'))}
+const val=n=>{const el=$('#modal').querySelector(`[name="${n}"]`);return el?el.value.trim():''};
+
+function submitCase(){
+  clearErrors();
+  const isUpd=draft.mode==='update';
+  const cur=isUpd?schemeBy(draft.key):null;
+  const orgSel=isUpd?orgBy(draft.orgCode):orgByLabel(val('orgLabel'));
+  const d={narrative:val('narrative'),name:val('name'),
+    code:isUpd?draft.key:val('code'),way4:isUpd?cur.way4:val('way4')};
+  let bad=false;
+  if(!d.narrative){fail('narrative','PS-001','This field is required.');bad=true}
+  else if(d.narrative.length>500){fail('narrative','PS-004','Narrative must not exceed 500 characters.');bad=true}
+  if(!d.name){fail('name','PS-001','This field is required.');bad=true}
+  else if(d.name.length>100){fail('name','PS-006','Card Product Scheme Name must not exceed 100 characters.');bad=true}
+  if(!orgSel){fail('orgCode','PS-005','Select the organization this card product scheme belongs to.');bad=true}
+  if(!isUpd){
+    if(!d.code){fail('code','PS-001','This field is required.');bad=true}
+    else if(!/^[A-Z0-9_]+$/.test(d.code)){
+      fail('code','PS-002','Card Product Scheme Code accepts uppercase letters, numbers and underscore only.');bad=true}
+    else if(db.schemes.some(s=>s.code===d.code)){
+      fail('code','PS-101',`Card Product Scheme Code ${d.code} is already in use. Enter a different value.`);bad=true}
+    if(!d.way4){fail('way4','PS-001','This field is required.');bad=true}
+    else if(orgSel&&!d.way4.startsWith('VK'+orgSel.tax)){
+      fail('way4','PS-103',`Way4 Classifier Value Code must start with VK${orgSel.tax} for the selected organization.`);bad=true}
+    else if(db.schemes.some(s=>s.way4===d.way4)){
+      const dup=db.schemes.find(s=>s.way4===d.way4);
+      fail('way4','PS-102',`Way4 Classifier Value Code ${d.way4} already belongs to card product scheme ${dup.code}.`);bad=true}
+  }
+  if(d.name&&orgSel&&db.schemes.some(s=>s.orgCode===orgSel.code&&s.code!==draft.key
+      &&s.name.toLowerCase()===d.name.toLowerCase())){
+    fail('name','PS-106',`Card Product Scheme Name ${d.name} already exists for this organization.`);bad=true}
+  ['bannerVi','bannerEn','cardVertical','cardHorizontal'].forEach(k=>{
+    if(!draft.imgs[k]){fail(k,'PS-001','This field is required.');bad=true}});
+  if(!draft.templateSvg){fail('template','PS-001','This field is required.');bad=true}
+  else if(!draft.previewDone){
+    fail('preview','PS-303','Run Preview Output at least once before submitting this request.');bad=true}
+  if(bad){toast('Kiểm tra lại các mục được đánh dấu.','no');return}
+
+  const key=isUpd?draft.key:d.code;
+  const p=pendingFor(key);
+  if(p){toast(`PS-404 · A pending request already exists for this card product scheme (case ${p.id}).`,'no');return}
+
+  const before=isUpd?{...cur}:null;
+  const after={orgCode:orgSel.code,name:d.name,code:key,way4:d.way4,
+    template:draft.templateName,templateSvg:draft.templateSvg,templatePreview:draft.templatePreview,...draft.imgs};
+  db.cases.unshift({id:newCaseId(),key,
+    type:isUpd?'Update Card Product Scheme':'Add new Card Product Scheme',
+    narrative:d.narrative,maker:me,checker:'',decision:'Waiting for approval',status:'Open',
+    createdAt:now(),updatedAt:now(),reason:'',before,after});
+  closeModal(); sub='cases'; caseTab='Waiting for approval'; render();
+  toast('Request submitted for approval.','ok');
+}
+
+/* ================= uploads ================= */
+function handleImg(key,file){
+  const box=document.querySelector(`[data-field="${key}"]`);
+  const setErr=(c,m)=>{box.classList.add('bad');box.querySelector('.err').innerHTML=`<code>${c}</code> ${esc(m)}`};
+  box.classList.remove('bad');
+  if(!file) return;
+  if(!['image/jpeg','image/jpg','image/png','image/gif','image/webp'].includes(file.type)){
+    setErr('PS-201','Image must be JPG, JPEG, PNG, GIF or WEBP.');return}
+  const mb=file.size/1048576;
+  if(mb>MAX_IMG_MB){setErr('PS-202',`Image must be 1 MB or smaller. Current file: ${mb.toFixed(2)} MB.`);return}
+  const fr=new FileReader();
+  fr.onload=()=>{draft.imgs[key]=fr.result;
+    document.getElementById('slot-'+key).innerHTML=shot(key,fr.result);bindModal();
+    toast(`Đã tải lên ${key} · ${Math.round(file.size/1024)} KB`,'ok')};
+  fr.onerror=()=>setErr('PS-205','This file cannot be read. Upload a different file.');
+  fr.readAsDataURL(file);
+}
+function loadTemplate(text,name){
+  const box=document.querySelector('[data-field="template"]');
+  const setErr=(c,m)=>{box.classList.add('bad');box.querySelector('.err').innerHTML=`<code>${c}</code> ${esc(m)}`};
+  box.classList.remove('bad');
+  const vars=parseVars(text);
+  if(!vars.length){setErr('PS-204','No data variables were found in this template. Check the file and upload again.');return}
+  const std=STD_VARS.map(v=>v[0]);
+  const bad=vars.filter(v=>!std.includes(v));
+  if(bad.length){setErr('PS-207',`This template contains unsupported variables: ${bad.join(', ')}. Use only the standard variables listed in the form.`);return}
+  draft.templateSvg=text; draft.templateName=name; draft.previewDone=false; draft.templatePreview=null;
+  document.getElementById('tplSlot').innerHTML=
+    `<div class="exval">📎 ${esc(name)}<button type="button" data-cleartpl style="margin-left:auto">🗑</button></div>`;
+  document.getElementById('varBox').innerHTML=varBoxHtml(vars);
+  const ta=$('#modal').querySelector('[name="previewValue"]'); if(ta) ta.value=exampleStr(vars);
+  document.getElementById('tplPreview').innerHTML='Chạy Preview Output để xem mặt thẻ';
+  bindModal();
+  toast(`Đọc được ${vars.length} biến từ template.`,'ok');
+}
+function runPreview(){
+  const box=document.querySelector('[data-field="preview"]');
+  const setErr=(c,m)=>{box.classList.add('bad');box.querySelector('.err').innerHTML=`<code>${c}</code> ${esc(m)}`};
+  box.classList.remove('bad');
+  if(!draft.templateSvg){setErr('PS-304','The card face could not be rendered. Check the template and preview values.');return}
+  const raw=val('previewValue');
+  if(!raw||!/^[^:;]+:[^;]*(;[^:;]+:[^;]*)*;?$/.test(raw)){
+    setErr('PS-301','Preview values must follow the format key:value;key:value.');return}
+  const vals={};
+  raw.split(';').filter(Boolean).forEach(p=>{const i=p.indexOf(':');vals[p.slice(0,i).trim()]=p.slice(i+1).trim()});
+  const vars=parseVars(draft.templateSvg);
+  const miss=vars.filter(v=>vals[v]===undefined||vals[v]==='');
+  if(miss.length){setErr('PS-302',`Provide a value for every variable in the template. Missing: ${miss.join(', ')}.`);return}
+  let s=draft.templateSvg;
+  vars.forEach(v=>{const x=v==='avatar_image'?AVATAR_PH:vals[v];
+    s=s.replaceAll(`{{${v}}}`,String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])))});
+  draft.templatePreview=uri(s); draft.previewDone=true;
+  document.getElementById('tplPreview').innerHTML=`<img src="${draft.templatePreview}" alt="Card face preview">`;
+  toast('Render mặt thẻ thành công.','ok');
+}
+
+/* ================= approve / reject ================= */
+function approve(id){
+  const c=caseById(id);
+  if(c.maker===me){toast('PS-401 · You cannot approve a request you created.','no');return}
+  const t=now();
+  if(c.type.startsWith('Add')) db.schemes.unshift({...c.after,createdAt:t,createdBy:c.maker,updatedAt:t,updatedBy:c.maker});
+  else Object.assign(schemeBy(c.key),c.after,{updatedAt:t,updatedBy:c.maker});
+  Object.assign(c,{decision:'Approved',status:'Closed',checker:me,updatedAt:t});
+  openCase=null;sub='cases';caseTab='Approved';render();
+  toast('Request approved. The change is now live.','ok');
+}
+function reject(id){
+  const ta=document.querySelector('[name="reason"]'), r=ta?ta.value.trim():'';
+  if(!r){fail('reason','PS-406','Enter a reason for rejection.');toast('Nhập lý do trước khi từ chối.','no');return}
+  Object.assign(caseById(id),{decision:'Rejected',status:'Closed',checker:me,reason:r,updatedAt:now()});
+  openCase=null;sub='cases';caseTab='Rejected';render();
+  toast('Request rejected. No data was changed.','ok');
+}
+
+/* ================= bindings ================= */
+function bind(){
+  document.querySelectorAll('[data-closecase]').forEach(b=>b.onclick=()=>{openCase=null;render()});
+  document.querySelectorAll('#tabs1 button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;sub='list';filters={};render()});
+  document.querySelectorAll('[data-sub]').forEach(b=>b.onclick=()=>{sub=b.dataset.sub;render()});
+  document.querySelectorAll('[data-ctab]').forEach(b=>b.onclick=()=>{caseTab=b.dataset.ctab;render()});
+  document.querySelectorAll('[data-filter]').forEach(el=>{
+    const k=el.dataset.filter;
+    const h=()=>{filters[k]=el.value;const pos=el.selectionStart;render();
+      const n=document.querySelector(`[data-filter="${k}"]`);
+      if(n){n.focus();if(n.setSelectionRange&&n.type!=='select-one')n.setSelectionRange(pos,pos)}};
+    el.tagName==='SELECT'?el.onchange=h:el.oninput=h});
+  const cr=document.querySelector('[data-act="create"]'); if(cr) cr.onclick=()=>openModal(psForm('create'));
+  const dl=document.querySelector('[data-act="download"]');
+  if(dl) dl.onclick=()=>toast('Export started. The file will download shortly.','ok');
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openModal(psForm('update',schemeBy(b.dataset.edit))));
+  document.querySelectorAll('tr[data-case]').forEach(tr=>tr.onclick=()=>{openCase=tr.dataset.case;window.scrollTo(0,0);render()});
+  const ap=document.querySelector('[data-approve]'); if(ap) ap.onclick=()=>approve(ap.dataset.approve);
+  const rj=document.querySelector('[data-reject]');  if(rj) rj.onclick=()=>reject(rj.dataset.reject);
+  document.querySelectorAll('.f textarea').forEach(el=>
+    el.addEventListener('input',()=>el.closest('.f').classList.remove('bad')));
+}
+function bindModal(){
+  const M=$('#modal');
+  M.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeModal);
+  const s=M.querySelector('[data-submit]'); if(s) s.onclick=submitCase;
+  M.querySelectorAll('[data-img]').forEach(i=>i.onchange=e=>handleImg(i.dataset.img,e.target.files[0]));
+  M.querySelectorAll('[data-clear]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.clear;draft.imgs[k]=null;
+    document.getElementById('slot-'+k).innerHTML=dropEl(k);bindModal()});
+  M.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{
+    const w=window.open(); if(w) w.document.write(`<img src="${draft.imgs[b.dataset.view]}" style="max-width:100%">`)});
+  const tin=M.querySelector('#in-tpl');
+  if(tin) tin.onchange=e=>{const f=e.target.files[0];if(!f)return;
+    const fr=new FileReader();fr.onload=()=>loadTemplate(fr.result,f.name);
+    fr.onerror=()=>toast('PS-205 · This file cannot be read.','no');fr.readAsText(f)};
+  const smp=M.querySelector('[data-sample]');
+  if(smp) smp.onclick=e=>{e.preventDefault();loadTemplate(SAMPLE_SVG,'uef_student_sample.svg')};
+  const ct=M.querySelector('[data-cleartpl]');
+  if(ct) ct.onclick=()=>{draft.templateSvg=null;draft.templateName=null;draft.previewDone=false;
+    draft.templatePreview=null;
+    document.getElementById('tplSlot').innerHTML=`<label class="drop" for="in-tpl"><div class="ic">📄</div>
+      <div class="t">Tải lên file .svg do đội Design export</div>
+      <div class="s">Template phẳng, không bo góc, chứa layout và các biến dữ liệu</div>
+      <input type="file" id="in-tpl" accept=".svg,image/svg+xml"></label>`;
+    document.getElementById('varBox').innerHTML='';
+    document.getElementById('tplPreview').innerHTML='Chạy Preview Output để xem mặt thẻ';
+    const ta=M.querySelector('[name="previewValue"]'); if(ta) ta.value='';
+    bindModal()};
+  const pv=M.querySelector('[data-preview]'); if(pv) pv.onclick=runPreview;
+  const cp=M.querySelector('[data-copy]');
+  if(cp) cp.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(cp.dataset.copy);
+    toast('Đã sao chép Example value.','ok')};
+  M.querySelectorAll('.f input,.f select,.f textarea').forEach(el=>
+    el.addEventListener('input',()=>el.closest('.f').classList.remove('bad')));
+  const ol=M.querySelector('[name="orgLabel"]');
+  if(ol) ol.oninput=()=>{const o=orgByLabel(ol.value);
+    draft.orgCode=o?o.code:'';
+    const h=M.querySelector('#way4hint');
+    if(h) h.innerHTML=o?` · với tổ chức này, mã phải bắt đầu bằng <b>VK${o.tax}</b>`:'';
+  };
+}
+$('#roleSel').onchange=e=>{me=e.target.value;render();toast(`Đang xem với vai trò ${me}.`)};
+$('#resetBtn').onclick=()=>{db=seed();filters={};sub='list';caseTab='Waiting for approval';openCase=null;
+  render();toast('Đã đặt lại dữ liệu mockup.','ok')};
+$('#backdrop').onclick=e=>{if(e.target.id==='backdrop')closeModal()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+render();
+</script>
