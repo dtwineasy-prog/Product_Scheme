@@ -58,7 +58,7 @@
 
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px}
   .filters{display:flex;gap:10px;flex-wrap:wrap;flex:1}
-  .filters input,.filters select{border:1px solid var(--line);border-radius:6px;padding:8px 11px;min-width:160px;background:#fcfcfd}
+  .filters input,.filters select{border:1px solid var(--line);border-radius:6px;padding:8px 11px;min-width:270px;background:#fcfcfd}
   .actions{display:flex;gap:10px;margin-left:auto}
   .btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:8px 14px;color:var(--ink);font-weight:500}
   .btn:hover{background:#f7f7fa}
@@ -539,7 +539,7 @@ function detailPage(id){
       ${c.reason?`<div class="note stop" style="margin:20px 0 0"><b>Lý do từ chối</b>${esc(c.reason)}</div>`:''}
     </div>
 
-    <div class="block"><h3>Thông tin chung</h3>
+    <div class="block"><h3>General Information</h3>
       <div class="meta">${['orgCode','name','code','way4'].map(field).join('')}</div></div>
 
     <div class="block"><h3>Hình ảnh cấu hình</h3>
@@ -588,8 +588,8 @@ const dropBox=(key,label,val)=>`<div class="f c3" data-field="${key}">
   <div id="slot-${key}">${val?shot(key,val):dropEl(key)}</div><span class="err"></span></div>`;
 const dropEl=key=>`<label class="drop" for="in-${key}">
   <div class="ic">🖼</div><div class="t">Nhấp hoặc kéo thả vào khu vực này để tải lên</div>
-  <div class="s">Hỗ trợ các định dạng tệp JPG, JPEG, PNG, GIF, WEBP. File size: &lt;= 1MB.</div>
-  <input type="file" id="in-${key}" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" data-img="${key}"></label>`;
+  <div class="s">Hỗ trợ các định dạng tệp JPG, JPEG, PNG, WEBP. File size: &lt;= 1MB.</div>
+  <input type="file" id="in-${key}" accept="image/jpeg,image/jpg,image/png,image/webp" data-img="${key}"></label>`;
 const shot=(key,src)=>`<div class="shot"><img src="${src}" alt="">
   <div class="tools"><button type="button" data-view="${key}">👁</button>
   <button type="button" data-clear="${key}">🗑</button></div></div>`;
@@ -612,7 +612,7 @@ function psForm(mode,s){
           <textarea name="narrative" placeholder="Nhập diễn giải cho yêu cầu này..."></textarea><span class="err"></span></div>
       </div></div></div>
 
-    <div class="group"><div class="gh">Thông tin chung</div><div class="gb">
+    <div class="group"><div class="gh">General Information</div><div class="gb">
       ${ro?`<div class="note info"><b>Organization, Card Product Scheme Code and Way4 code cannot be changed</b>
         These values identify the customer segment across the mobile app and the card system, and stay fixed once approved.
         If a different code is needed, create a new card product scheme and stop issuing new cards under this one.</div>`:''}
@@ -760,8 +760,8 @@ function handleImg(key,file){
   const setErr=(c,m)=>{box.classList.add('bad');box.querySelector('.err').innerHTML=`<code>${c}</code> ${esc(m)}`};
   box.classList.remove('bad');
   if(!file) return;
-  if(!['image/jpeg','image/jpg','image/png','image/gif','image/webp'].includes(file.type)){
-    setErr('PS-201','Image must be JPG, JPEG, PNG, GIF or WEBP.');return}
+  if(!['image/jpeg','image/jpg','image/png','image/webp'].includes(file.type)){
+    setErr('PS-201','Image must be JPG, JPEG, PNG or WEBP.');return}
   const mb=file.size/1048576;
   if(mb>MAX_IMG_MB){setErr('PS-202',`Image must be 1 MB or smaller. Current file: ${mb.toFixed(2)} MB.`);return}
   const fr=new FileReader();
