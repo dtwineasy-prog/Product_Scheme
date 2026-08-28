@@ -58,7 +58,7 @@
 
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px}
   .filters{display:flex;gap:10px;flex-wrap:wrap;flex:1}
-  .filters input,.filters select{border:1px solid var(--line);border-radius:6px;padding:8px 11px;min-width:270px;background:#fcfcfd}
+  .filters input,.filters select{border:1px solid var(--line);border-radius:6px;padding:8px 11px;min-width:160px;background:#fcfcfd}
   .actions{display:flex;gap:10px;margin-left:auto}
   .btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:8px 14px;color:var(--ink);font-weight:500}
   .btn:hover{background:#f7f7fa}
@@ -231,8 +231,8 @@ const STD_VARS=[
 ];
 const SAMPLE_VAL={customer_full_name:'Nguyễn Văn An',customer_dob:'11/08/2008',
   employee_id:'NV-000123',job_title:'Chuyên viên cao cấp',duration:'2026-2030',term:'3 năm',avatar_image:'avatar'};
-const SPEC_LINK={url:'https://docs.google.com/document/d/1k_WGrPqi8-g7GsuaWldZK2--LEg6iQdjiOJRe2eiTmI/edit?usp=sharing',updated:'12/08/2026'};
-const TPL_GUIDE={url:'https://docs.google.com/document/d/1k_WGrPqi8-g7GsuaWldZK2--LEg6iQdjiOJRe2eiTmI/edit?usp=sharing'};
+const SPEC_LINK={url:'https://docs.google.com/document/d/quy-cach-anh-vikki',updated:'12/08/2026'};
+const TPL_GUIDE={url:'https://docs.google.com/document/d/huong-dan-template-card-face'};
 const CAN_MAKE=['Product Maker','ITOPS Admin'], CAN_CHECK=['Product Checker','ITOPS Admin'];
 const MAX_IMG_MB=1;
 
@@ -313,8 +313,8 @@ const orgLabel=o=>o?`${o.shortVi} - ${o.code} - ${o.tax}`:'—';
 const orgByLabel=l=>ORGS.find(o=>orgLabel(o)===String(l).trim());
 
 /* ================= seed ================= */
-const PS=(orgCode,name,code,way4,c1,c2,seg,extra={})=>({
-  orgCode,name,code,way4,
+const PS=(orgCode,name,code,way4,addInfo,c1,c2,seg,extra={})=>({
+  orgCode,name,code,way4,addInfo,
   bannerVi:banner(name,c1,c2),bannerEn:banner(name,c1,c2),
   cardVertical:cardV(orgBy(orgCode).shortVi.split(' ').pop(),seg,c1,c2),
   cardHorizontal:cardH(orgBy(orgCode).shortVi.split(' ').pop(),c1,c2),
@@ -323,12 +323,12 @@ const PS=(orgCode,name,code,way4,c1,c2,seg,extra={})=>({
 
 const seed=()=>({
   schemes:[
-    PS('UEF','UEF SINH VIÊN','VIKKI_ONE_CONNECT_UEF_STUDENT','VK0305515934S','#0b57a4','#4aa3f0','THẺ SINH VIÊN'),
-    PS('UEF','UEF GIẢNG VIÊN','VIKKI_ONE_CONNECT_UEF_TEACHER','VK0305515934E','#0b57a4','#6fbcf7','THẺ GIẢNG VIÊN'),
-    PS('VICTORIA_SCHOOL','VICTORIA SCHOOL - NHÂN VIÊN','VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE','VK0318601242E','#1a7a5e','#4fc39b','THẺ NHÂN VIÊN'),
-    PS('HDBANK','HDBANK - NHÂN VIÊN','VIKKI_ONE_CONNECT_HDBANK_EMPLOYEE','VK0300608092E','#d0021b','#f5723a','THẺ NHÂN VIÊN'),
-    PS('SOVICO','SOVICO - BOM','VIKKI_ONE_CONNECT_SOVICO_BOM','VK0101205067B','#3b2f83','#8a63d2','THẺ BOM'),
-    PS('VIKKI_BANK','VIKKI BANK - BOM','VIKKI_ONE_CONNECT_VIKKIBANK_BOM','VK0301442379B','#7b2ff7','#c06cf8','THẺ BOM')
+    PS('UEF','UEF SINH VIÊN','VIKKI_ONE_CONNECT_UEF_STUDENT','VK0305515934S','UEF - Sinh Viên','#0b57a4','#4aa3f0','THẺ SINH VIÊN'),
+    PS('UEF','UEF GIẢNG VIÊN','VIKKI_ONE_CONNECT_UEF_TEACHER','VK0305515934E','UEF - Giáo Viên','#0b57a4','#6fbcf7','THẺ GIẢNG VIÊN'),
+    PS('VICTORIA_SCHOOL','VICTORIA SCHOOL - NHÂN VIÊN','VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE','VK0318601242E','Employee - Nhân viên','#1a7a5e','#4fc39b','THẺ NHÂN VIÊN'),
+    PS('HDBANK','HDBANK - NHÂN VIÊN','VIKKI_ONE_CONNECT_HDBANK_EMPLOYEE','VK0300608092E','Employee - Nhân viên','#d0021b','#f5723a','THẺ NHÂN VIÊN'),
+    PS('SOVICO','SOVICO - BOM','VIKKI_ONE_CONNECT_SOVICO_BOM','VK0101205067B','BOM - BK TRIP','#3b2f83','#8a63d2','THẺ BOM'),
+    PS('VIKKI_BANK','VIKKI BANK - BOM','VIKKI_ONE_CONNECT_VIKKIBANK_BOM','VK0301442379B','BOM - Ban điều hành','#7b2ff7','#c06cf8','THẺ BOM')
   ],
   cases:[
     {id:'DMC17901234567890123',type:'Add new Card Product Scheme',
@@ -337,6 +337,7 @@ const seed=()=>({
      createdAt:'09:14 12/08/2026',updatedAt:'09:14 12/08/2026',reason:'',key:'VIKKI_ONE_CONNECT_AXIS_EMPLOYEE',
      before:null,
      after:{orgCode:'AXIS',name:'AXIS - NHÂN VIÊN',code:'VIKKI_ONE_CONNECT_AXIS_EMPLOYEE',way4:'VK0302287334E',
+       addInfo:'Employee - Nhân viên',
        bannerVi:banner('AXIS','#0f7a8a','#4fc7d6'),bannerEn:banner('AXIS','#0f7a8a','#4fc7d6'),
        cardVertical:cardV('AXIS','THẺ NHÂN VIÊN','#0f7a8a','#4fc7d6'),
        cardHorizontal:cardH('AXIS','#0f7a8a','#4fc7d6'),
@@ -347,11 +348,13 @@ const seed=()=>({
      createdAt:'14:02 08/08/2026',updatedAt:'15:31 08/08/2026',reason:'',
      key:'VIKKI_ONE_CONNECT_UEF_STUDENT',
      before:{orgCode:'UEF',name:'UEF SINH VIEN',code:'VIKKI_ONE_CONNECT_UEF_STUDENT',way4:'VK0305515934S',
+       addInfo:'UEF - SV',
        bannerVi:banner('UEF','#1c4f8f','#3d7fd0'),bannerEn:banner('UEF','#1c4f8f','#3d7fd0'),
        cardVertical:cardV('UEF','THẺ SINH VIÊN','#1c4f8f','#3d7fd0'),
        cardHorizontal:cardH('UEF','#1c4f8f','#3d7fd0'),
        template:'uef_student_v1.svg',templateSvg:SAMPLE_SVG,templatePreview:null},
      after:{orgCode:'UEF',name:'UEF SINH VIÊN',code:'VIKKI_ONE_CONNECT_UEF_STUDENT',way4:'VK0305515934S',
+       addInfo:'UEF - Sinh Viên',
        bannerVi:banner('UEF','#0b57a4','#4aa3f0'),bannerEn:banner('UEF','#0b57a4','#4aa3f0'),
        cardVertical:cardV('UEF','THẺ SINH VIÊN','#0b57a4','#4aa3f0'),
        cardHorizontal:cardH('UEF','#0b57a4','#4aa3f0'),
@@ -363,13 +366,13 @@ const seed=()=>({
      reason:'Ảnh thẻ dọc chưa đúng quy cách tỷ lệ trong tài liệu Design. Đề nghị xuất lại rồi tạo case mới.',
      key:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',
      before:{orgCode:'VICTORIA_SCHOOL',name:'VICTORIA SCHOOL - NHÂN VIÊN',
-       code:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',way4:'VK0318601242E',
+       code:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',way4:'VK0318601242E',addInfo:'Employee - Nhân viên',
        bannerVi:banner('VICTORIA','#1a7a5e','#4fc39b'),bannerEn:banner('VICTORIA','#1a7a5e','#4fc39b'),
        cardVertical:cardV('VICTORIA','THẺ NHÂN VIÊN','#1a7a5e','#4fc39b'),
        cardHorizontal:cardH('VICTORIA','#1a7a5e','#4fc39b'),
        template:'victoria_employee.svg',templateSvg:SAMPLE_SVG,templatePreview:null},
      after:{orgCode:'VICTORIA_SCHOOL',name:'VICTORIA SCHOOL - NHÂN VIÊN',
-       code:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',way4:'VK0318601242E',
+       code:'VIKKI_ONE_CONNECT_VICTORIA_EMPLOYEE',way4:'VK0318601242E',addInfo:'Employee - Nhân viên',
        bannerVi:banner('VICTORIA','#1a7a5e','#4fc39b'),bannerEn:banner('VICTORIA','#1a7a5e','#4fc39b'),
        cardVertical:cardV('VICTORIA','NHÂN VIÊN','#6b4f1a','#d4a03c'),
        cardHorizontal:cardH('VICTORIA','#1a7a5e','#4fc39b'),
@@ -378,7 +381,7 @@ const seed=()=>({
 });
 
 let db=seed(), me='Product Maker', tab='ps', sub='list',
-    caseTab='Waiting for approval', filters={}, openCase=null, draft=null;
+    caseTab='Waiting for approval', filters={}, openCase=null, openScheme=null, draft=null;
 
 /* ================= helpers ================= */
 const $=s=>document.querySelector(s);
@@ -404,9 +407,11 @@ function render(){
    :'· chỉ xem và tải xuống';
   const nav=['Deposit Configuration','Card Configuration','Overdraft Management',
     'VikkiONE Create/Delete WhiteList Case','Data Configuration','Reward Management'];
-  $('#topnav').innerHTML=nav.map(n=>`<button class="${n==='Data Configuration'&&!openCase?'on':''}">${n}</button>`).join('')
-    +(openCase?`<button class="casetab" data-closecase>${esc(openCase)} <i>×</i></button>`:'');
-  $('#root').innerHTML=openCase?detailPage(openCase):mainPage();
+  const sch=openScheme?schemeBy(openScheme):null;
+  $('#topnav').innerHTML=nav.map(n=>`<button class="${n==='Data Configuration'&&!openCase&&!openScheme?'on':''}">${n}</button>`).join('')
+    +(openCase?`<button class="casetab" data-closecase>${esc(openCase)} <i>×</i></button>`:'')
+    +(sch?`<button class="casetab" data-closescheme>${esc(sch.name)} <i>×</i></button>`:'');
+  $('#root').innerHTML=openCase?detailPage(openCase):(sch?schemeDetail(sch):mainPage());
   bind();
 }
 function mainPage(){
@@ -433,33 +438,36 @@ function psView(){
 function listView(){
   const rows=db.schemes.filter(s=>{
     const q=(k,v)=>!(filters[k]||'').trim()||String(v??'').toLowerCase().includes(filters[k].trim().toLowerCase());
-    return (!filters.org||s.orgCode===filters.org)&&q('name',s.name)&&q('code',s.code)&&q('way4',s.way4);
+    return (!filters.org||s.orgCode===filters.org)&&q('name',s.name)&&q('code',s.code)
+      &&q('way4',s.way4)&&q('addInfo',s.addInfo);
   });
   const body=rows.length?rows.map((s,i)=>{
     const o=orgBy(s.orgCode);
-    return `<tr>
+    return `<tr class="clickable" data-scheme="${esc(s.code)}">
       <td>${i+1}</td>
       <td><img class="thumb" src="${s.cardVertical}" alt="Card ${esc(s.name)}"></td>
       <td>${esc(o.shortVi)}</td><td>${esc(o.tax)}</td>
       <td><b>${esc(s.name)}</b></td>
       <td class="code">${esc(s.code)}</td>
       <td class="code">${esc(s.way4)}</td>
+      <td class="wrap">${esc(s.addInfo)}</td>
       <td>${esc(s.createdAt)}</td><td>${esc(s.createdBy)||'—'}</td>
       <td>${esc(s.updatedAt)}</td><td>${esc(s.updatedBy)||'—'}</td>
       <td>${rowAction(s.code)}</td></tr>`}).join('')
-    :`<tr><td colspan="12" class="empty">No card product schemes match your filters. Clear a filter to see more results.</td></tr>`;
+    :`<tr><td colspan="13" class="empty">No card product schemes match your filters. Clear a filter to see more results.</td></tr>`;
   return `<div class="toolbar"><div class="filters">
       <select data-filter="org"><option value="">Filter by Organization</option>
         ${ORGS.map(o=>`<option value="${o.code}" ${filters.org===o.code?'selected':''}>${esc(orgLabel(o))}</option>`).join('')}</select>
       <input data-filter="name" placeholder="Filter by Card Product Scheme Name" value="${esc(filters.name||'')}">
       <input data-filter="code" placeholder="Filter by Card Product Scheme Code" value="${esc(filters.code||'')}">
       <input data-filter="way4" placeholder="Filter by Way4 Classifier Value Code" value="${esc(filters.way4||'')}">
+      <input data-filter="addInfo" placeholder="Filter by Additional Info" value="${esc(filters.addInfo||'')}">
     </div><div class="actions">
       ${canMake()?`<button class="btn primary" data-act="create">Create Case</button>`:''}
       <button class="btn" data-act="download">⤓ Download</button></div></div>
     <div class="tablewrap"><table><thead><tr>
       ${['No','Card Preview','Organization','Org tax code','Card Product Scheme Name','Card Product Scheme Code',
-         'Way4 Classifier Value Code','Created At','Created By','Updated At','Updated By']
+         'Way4 Classifier Value Code','Additional Info','Created At','Created By','Updated At','Updated By']
         .map(h=>`<th><span class="aa">Aa</span>${h}</th>`).join('')}
       <th>Thao tác</th></tr></thead><tbody>${body}</tbody></table></div>
     <div class="count">${rows.length} card product scheme · không có thao tác xóa theo mục 9.2 của SRS</div>`;
@@ -495,9 +503,83 @@ function casesView(){
     <div class="count">${list.length} case · click vào dòng bất kỳ để mở Case Detail</div>`;
 }
 
+/* ================= record detail (view details) ================= */
+function schemeDetail(s){
+  const o=orgBy(s.orgCode);
+  const vars=parseVars(s.templateSvg||'');
+  const hist=db.cases.filter(c=>c.key===s.code);
+  const mi=(l,v)=>`<div class="m"><div class="lbl">${l}</div><div class="val">${v}</div></div>`;
+  const histBody=hist.length?hist.map(c=>`<tr class="clickable" data-case="${esc(c.id)}">
+      <td>${esc(c.id)}</td>
+      <td><span class="chip ${/Update/.test(c.type)?'blue':'green'}">${esc(c.type)}</span></td>
+      <td><span class="chip ${c.status==='Open'?'green':'grey'}">${esc(c.status)}</span></td>
+      <td><span class="chip ${c.decision==='Approved'?'green':c.decision==='Rejected'?'red':'amber'}">${esc(c.decision)}</span></td>
+      <td>${esc(c.maker)}</td><td>${esc(c.checker)||'—'}</td><td>${esc(c.createdAt)}</td>
+      <td>${esc((c.after&&c.after.template)||(c.before&&c.before.template)||'—')}</td></tr>`).join('')
+    :`<tr><td colspan="8" class="empty">No data available</td></tr>`;
+
+  return `<div class="page detail">
+    <div class="block">
+      <div class="dhead"><button class="back" data-closescheme>‹</button>
+        <h2>${esc(s.code)} - ${esc(s.name)}</h2>
+        ${canMake()&&!pendingFor(s.code)?`<button class="btn sm" style="margin-left:auto" data-edit="${esc(s.code)}">Sửa</button>`:''}
+        ${pendingFor(s.code)?`<span class="chip amber" style="margin-left:auto">Đang chờ duyệt</span>`:''}
+      </div>
+      <div class="meta">
+        ${mi('Organization',esc(orgLabel(o)))}
+        ${mi('Org tax code',esc(o.tax))}
+        ${mi('Card Product Scheme Name',esc(s.name))}
+        ${mi('Card Product Scheme Code',`<span class="code">${esc(s.code)}</span>`)}
+        ${mi('Way4 Classifier Value Code',`<span class="code">${esc(s.way4)}</span>`)}
+        ${mi('Additional Info',esc(s.addInfo)||'—')}
+        ${mi('Created At',esc(s.createdAt))}
+        ${mi('Created By',esc(s.createdBy)||'—')}
+        ${mi('Updated At',esc(s.updatedAt))}
+        ${mi('Updated By',esc(s.updatedBy)||'—')}
+      </div>
+    </div>
+
+    <div class="block"><h3>Card List Banner Image</h3>
+      <div class="assets">
+        <div class="asset"><div class="lbl">Card List Banner Image (Vi)</div>
+          <img src="${s.bannerVi}" alt="Banner Vi"></div>
+        <div class="asset"><div class="lbl">Card List Banner Image (En)</div>
+          <img src="${s.bannerEn}" alt="Banner En"></div>
+      </div></div>
+
+    <div class="block"><h3>Card Design (Static Image)</h3>
+      <div class="assets">
+        <div class="asset"><div class="lbl">Hình thẻ Dọc (Ảnh Tĩnh)</div>
+          <img src="${s.cardVertical}" alt="Card vertical" style="max-width:180px"></div>
+        <div class="asset"><div class="lbl">Hình thẻ Ngang (Ảnh Tĩnh)</div>
+          <img src="${s.cardHorizontal}" alt="Card horizontal"></div>
+      </div></div>
+
+    <div class="block"><h3>Card Face Design Template</h3>
+      <div class="row3">
+        <div>
+          <div class="m"><div class="lbl">Template file</div><div class="val">📎 ${esc(s.template||'—')}</div></div>
+          <div class="lbl" style="margin-top:18px;font-size:12.5px;color:var(--ink-3)">Biến parse được từ template</div>
+          <ol class="varlist">${vars.map(v=>`<li>{{${esc(v)}}}</li>`).join('')||'<li>—</li>'}</ol>
+        </div>
+        <div><div class="lbl" style="font-size:12.5px;color:var(--ink-3);margin-bottom:7px">Mặt thẻ hiển thị trên Mobile App</div>
+          <div class="cardprev">${s.templatePreview?`<img src="${s.templatePreview}" alt="Card face">`
+            :renderTplImg(s.templateSvg||SAMPLE_SVG,SAMPLE_VAL)}</div></div>
+      </div></div>
+
+    <div class="block"><h3>Card Product Scheme History</h3>
+      <div class="tablewrap"><table><thead><tr>
+        ${['Case ID','Business Type','Status','Checker Decision','Created By','Checker By','Created At','Template File Name']
+          .map(h=>`<th><span class="aa">Aa</span>${h}</th>`).join('')}
+      </tr></thead><tbody>${histBody}</tbody></table></div>
+      ${hist.length?`<div class="count">${hist.length} case · click vào dòng để mở Case Detail</div>`:''}
+    </div>
+  </div>`;
+}
+
 /* ================= case detail ================= */
 const FLD={orgCode:'Organization',name:'Card Product Scheme Name',
-  code:'Card Product Scheme Code',way4:'Way4 Classifier Value Code'};
+  code:'Card Product Scheme Code',way4:'Way4 Classifier Value Code',addInfo:'Additional Info'};
 const ASSETS=[['bannerVi','Card List Banner Image (Vi)'],['bannerEn','Card List Banner Image (En)'],
   ['cardVertical','Hình thẻ Dọc (Ảnh Tĩnh)'],['cardHorizontal','Hình thẻ Ngang (Ảnh Tĩnh)']];
 
@@ -539,8 +621,8 @@ function detailPage(id){
       ${c.reason?`<div class="note stop" style="margin:20px 0 0"><b>Lý do từ chối</b>${esc(c.reason)}</div>`:''}
     </div>
 
-    <div class="block"><h3>General Information</h3>
-      <div class="meta">${['orgCode','name','code','way4'].map(field).join('')}</div></div>
+    <div class="block"><h3>Thông tin chung</h3>
+      <div class="meta">${['orgCode','name','code','way4','addInfo'].map(field).join('')}</div></div>
 
     <div class="block"><h3>Hình ảnh cấu hình</h3>
       <div class="assets">${ASSETS.map(asset).join('')}</div></div>
@@ -588,8 +670,8 @@ const dropBox=(key,label,val)=>`<div class="f c3" data-field="${key}">
   <div id="slot-${key}">${val?shot(key,val):dropEl(key)}</div><span class="err"></span></div>`;
 const dropEl=key=>`<label class="drop" for="in-${key}">
   <div class="ic">🖼</div><div class="t">Nhấp hoặc kéo thả vào khu vực này để tải lên</div>
-  <div class="s">Hỗ trợ các định dạng tệp JPG, JPEG, PNG, WEBP. File size: &lt;= 1MB.</div>
-  <input type="file" id="in-${key}" accept="image/jpeg,image/jpg,image/png,image/webp" data-img="${key}"></label>`;
+  <div class="s">Hỗ trợ các định dạng tệp JPG, JPEG, PNG, GIF, WEBP. File size: &lt;= 1MB.</div>
+  <input type="file" id="in-${key}" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" data-img="${key}"></label>`;
 const shot=(key,src)=>`<div class="shot"><img src="${src}" alt="">
   <div class="tools"><button type="button" data-view="${key}">👁</button>
   <button type="button" data-clear="${key}">🗑</button></div></div>`;
@@ -612,7 +694,7 @@ function psForm(mode,s){
           <textarea name="narrative" placeholder="Nhập diễn giải cho yêu cầu này..."></textarea><span class="err"></span></div>
       </div></div></div>
 
-    <div class="group"><div class="gh">General Information</div><div class="gb">
+    <div class="group"><div class="gh">Thông tin chung</div><div class="gb">
       ${ro?`<div class="note info"><b>Organization, Card Product Scheme Code and Way4 code cannot be changed</b>
         These values identify the customer segment across the mobile app and the card system, and stay fixed once approved.
         If a different code is needed, create a new card product scheme and stop issuing new cards under this one.</div>`:''}
@@ -636,6 +718,11 @@ function psForm(mode,s){
             placeholder="Vui lòng nhập mã Classifier tương ứng trên Way4"><span class="err"></span>
           <span class="help">Cấu trúc chung: <b>VK${'$'}{org_tax_code}${'$'}{segment}</b>
             <span id="way4hint"></span></span></div>
+        <div class="f" data-field="addInfo"><label><span class="req">*</span>Additional Info</label>
+          <input name="addInfo" value="${esc(x.addInfo||'')}" maxlength="120"
+            placeholder="VD: Employee - Nhân viên"><span class="err"></span>
+          <span class="help">Mô tả phân khúc khách hàng, tối đa 100 ký tự.
+            Format khuyến nghị <b>&lt;EN&gt; - &lt;VN&gt;</b>.${ro?' Được phép sửa.':''}</span></div>
       </div></div></div>
 
     <div class="group"><div class="gh">Card List Banner Image ${specLine()}</div><div class="gb">
@@ -708,13 +795,15 @@ function submitCase(){
   const isUpd=draft.mode==='update';
   const cur=isUpd?schemeBy(draft.key):null;
   const orgSel=isUpd?orgBy(draft.orgCode):orgByLabel(val('orgLabel'));
-  const d={narrative:val('narrative'),name:val('name'),
+  const d={narrative:val('narrative'),name:val('name'),addInfo:val('addInfo'),
     code:isUpd?draft.key:val('code'),way4:isUpd?cur.way4:val('way4')};
   let bad=false;
   if(!d.narrative){fail('narrative','PS-001','This field is required.');bad=true}
   else if(d.narrative.length>500){fail('narrative','PS-004','Narrative must not exceed 500 characters.');bad=true}
   if(!d.name){fail('name','PS-001','This field is required.');bad=true}
   else if(d.name.length>100){fail('name','PS-006','Card Product Scheme Name must not exceed 100 characters.');bad=true}
+  if(!d.addInfo){fail('addInfo','PS-001','This field is required.');bad=true}
+  else if(d.addInfo.length>100){fail('addInfo','PS-007','Additional Info must not exceed 100 characters.');bad=true}
   if(!orgSel){fail('orgCode','PS-005','Select the organization this card product scheme belongs to.');bad=true}
   if(!isUpd){
     if(!d.code){fail('code','PS-001','This field is required.');bad=true}
@@ -744,13 +833,13 @@ function submitCase(){
   if(p){toast(`PS-404 · A pending request already exists for this card product scheme (case ${p.id}).`,'no');return}
 
   const before=isUpd?{...cur}:null;
-  const after={orgCode:orgSel.code,name:d.name,code:key,way4:d.way4,
+  const after={orgCode:orgSel.code,name:d.name,code:key,way4:d.way4,addInfo:d.addInfo,
     template:draft.templateName,templateSvg:draft.templateSvg,templatePreview:draft.templatePreview,...draft.imgs};
   db.cases.unshift({id:newCaseId(),key,
     type:isUpd?'Update Card Product Scheme':'Add new Card Product Scheme',
     narrative:d.narrative,maker:me,checker:'',decision:'Waiting for approval',status:'Open',
     createdAt:now(),updatedAt:now(),reason:'',before,after});
-  closeModal(); sub='cases'; caseTab='Waiting for approval'; render();
+  closeModal(); openScheme=null; sub='cases'; caseTab='Waiting for approval'; render();
   toast('Request submitted for approval.','ok');
 }
 
@@ -760,8 +849,8 @@ function handleImg(key,file){
   const setErr=(c,m)=>{box.classList.add('bad');box.querySelector('.err').innerHTML=`<code>${c}</code> ${esc(m)}`};
   box.classList.remove('bad');
   if(!file) return;
-  if(!['image/jpeg','image/jpg','image/png','image/webp'].includes(file.type)){
-    setErr('PS-201','Image must be JPG, JPEG, PNG or WEBP.');return}
+  if(!['image/jpeg','image/jpg','image/png','image/gif','image/webp'].includes(file.type)){
+    setErr('PS-201','Image must be JPG, JPEG, PNG, GIF or WEBP.');return}
   const mb=file.size/1048576;
   if(mb>MAX_IMG_MB){setErr('PS-202',`Image must be 1 MB or smaller. Current file: ${mb.toFixed(2)} MB.`);return}
   const fr=new FileReader();
@@ -832,6 +921,9 @@ function reject(id){
 /* ================= bindings ================= */
 function bind(){
   document.querySelectorAll('[data-closecase]').forEach(b=>b.onclick=()=>{openCase=null;render()});
+  document.querySelectorAll('[data-closescheme]').forEach(b=>b.onclick=()=>{openScheme=null;render()});
+  document.querySelectorAll('tr[data-scheme]').forEach(tr=>tr.onclick=()=>{
+    openScheme=tr.dataset.scheme;window.scrollTo(0,0);render()});
   document.querySelectorAll('#tabs1 button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;sub='list';filters={};render()});
   document.querySelectorAll('[data-sub]').forEach(b=>b.onclick=()=>{sub=b.dataset.sub;render()});
   document.querySelectorAll('[data-ctab]').forEach(b=>b.onclick=()=>{caseTab=b.dataset.ctab;render()});
@@ -844,7 +936,8 @@ function bind(){
   const cr=document.querySelector('[data-act="create"]'); if(cr) cr.onclick=()=>openModal(psForm('create'));
   const dl=document.querySelector('[data-act="download"]');
   if(dl) dl.onclick=()=>toast('Export started. The file will download shortly.','ok');
-  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openModal(psForm('update',schemeBy(b.dataset.edit))));
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();openModal(psForm('update',schemeBy(b.dataset.edit)))});
   document.querySelectorAll('tr[data-case]').forEach(tr=>tr.onclick=()=>{openCase=tr.dataset.case;window.scrollTo(0,0);render()});
   const ap=document.querySelector('[data-approve]'); if(ap) ap.onclick=()=>approve(ap.dataset.approve);
   const rj=document.querySelector('[data-reject]');  if(rj) rj.onclick=()=>reject(rj.dataset.reject);
@@ -892,8 +985,8 @@ function bindModal(){
   };
 }
 $('#roleSel').onchange=e=>{me=e.target.value;render();toast(`Đang xem với vai trò ${me}.`)};
-$('#resetBtn').onclick=()=>{db=seed();filters={};sub='list';caseTab='Waiting for approval';openCase=null;
-  render();toast('Đã đặt lại dữ liệu mockup.','ok')};
+$('#resetBtn').onclick=()=>{db=seed();filters={};sub='list';caseTab='Waiting for approval';
+  openCase=null;openScheme=null;render();toast('Đã đặt lại dữ liệu mockup.','ok')};
 $('#backdrop').onclick=e=>{if(e.target.id==='backdrop')closeModal()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 render();
